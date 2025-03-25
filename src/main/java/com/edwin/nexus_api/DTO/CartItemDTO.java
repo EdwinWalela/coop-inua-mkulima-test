@@ -1,7 +1,5 @@
 package com.edwin.nexus_api.DTO;
 
-import com.edwin.nexus_api.model.Product;
-
 public class CartItemDTO {
     private Integer id;
     private ProductDTO product;

@@ -3,7 +3,6 @@ package com.edwin.nexus_api.controller;
 import com.edwin.nexus_api.DTO.CartItemDTO;
 import com.edwin.nexus_api.DTO.NewCartItemDTO;
 import com.edwin.nexus_api.DTO.UserCartDTO;
-import com.edwin.nexus_api.model.Cart;
 import com.edwin.nexus_api.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
