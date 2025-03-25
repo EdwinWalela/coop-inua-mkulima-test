@@ -2,6 +2,7 @@ package com.edwin.nexus_api.controller;
 
 import com.edwin.nexus_api.DTO.CartItemDTO;
 import com.edwin.nexus_api.DTO.NewCartItemDTO;
+import com.edwin.nexus_api.DTO.UserCartDTO;
 import com.edwin.nexus_api.model.Cart;
 import com.edwin.nexus_api.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/{userId}")
-    public List<CartItemDTO> getUserCartItems(@PathVariable Integer userId){
+    public UserCartDTO getUserCartItems(@PathVariable Integer userId){
         return this.cartService.getUserCartItems(userId);
     }
 

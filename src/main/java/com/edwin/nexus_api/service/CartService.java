@@ -23,9 +23,10 @@ public class CartService {
     @Autowired
     private ProductService productService;
 
-    public List<CartItemDTO> getUserCartItems(Integer userId){
+    public UserCartDTO getUserCartItems(Integer userId){
         List<Cart> cartItems = this.cartRepository.findByUserId(userId);
-        return cartItems.stream().map(cart -> {
+        float itemTotal = (float) cartItems.stream().mapToDouble(cart -> cart.getProduct().getPrice() * cart.getQuantity()).sum();
+        List <CartItemDTO> cartItemDTOs = cartItems.stream().map(cart -> {
             CartItemDTO cartItemDTO = new CartItemDTO();
             ProductDTO productDTO = new ProductDTO();
             productDTO.setDescription(cart.getProduct().getDescription());
@@ -37,6 +38,11 @@ public class CartService {
             cartItemDTO.setQuantity(cart.getQuantity());
             return cartItemDTO;
         }).toList();
+
+        return new UserCartDTO(
+                cartItemDTOs,
+                itemTotal
+        );
     }
 
     public List<CartItemDTO> addToUserCart(NewCartItemDTO newCartItemDTO){
