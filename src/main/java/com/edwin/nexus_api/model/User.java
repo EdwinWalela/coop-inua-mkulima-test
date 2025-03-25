@@ -1,5 +1,6 @@
 package com.edwin.nexus_api.model;
 
+import com.edwin.nexus_api.auth.Bcrypt;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -34,7 +35,7 @@ public class User {
     @PrePersist
     public void prePersist(){
         this.createdAt = new Date();
-        // TODO: hash password
+        this.password = Bcrypt.hash(this.password);
     }
 
     public Integer getId() {
