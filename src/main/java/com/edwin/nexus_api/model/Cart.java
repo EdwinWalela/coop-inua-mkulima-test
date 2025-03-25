@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "cart")
 public class Cart {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
@@ -23,7 +23,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int id, User user, Product product, int quantity) {
+    public Cart(Integer id, User user, Product product, int quantity) {
         this.id = id;
         this.user = user;
         this.product = product;
