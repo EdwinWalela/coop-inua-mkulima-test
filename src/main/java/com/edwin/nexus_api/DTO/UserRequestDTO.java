@@ -1,30 +1,23 @@
 package com.edwin.nexus_api.DTO;
 
 public class UserRequestDTO {
-    private String username;
-    private String staffId;
+    private int id;
     private String emailAddress;
 
-    public UserRequestDTO(String username, String staffId, String emailAddress) {
-        this.username = username;
-        this.staffId = staffId;
+    public UserRequestDTO() {
+    }
+
+    public UserRequestDTO(int id, String emailAddress) {
+        this.id = id;
         this.emailAddress = emailAddress;
     }
 
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmailAddress() {

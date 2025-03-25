@@ -1,5 +1,6 @@
 package com.edwin.nexus_api.service;
 
+import com.edwin.nexus_api.DTO.UserCreationDTO;
 import com.edwin.nexus_api.DTO.UserRequestDTO;
 import com.edwin.nexus_api.model.User;
 import com.edwin.nexus_api.repository.UserRepository;
@@ -16,22 +17,36 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserRequestDTO userRequest){
+    public UserRequestDTO createUser(UserCreationDTO userRequest){
         User user = new User(
                 null,
-                userRequest.getUsername(),
-                userRequest.getStaffId(),
-                userRequest.getEmailAddress()
+                userRequest.getEmailAddress(),
+                userRequest.getPassword(),
+                null
         );
-        return this.userRepository.save(user);
+        User createdUser = this.userRepository.save(user);
+        return new UserRequestDTO(
+                createdUser.getId(),
+                createdUser.getEmailAddress()
+        );
     }
 
-    public List<User> getAllUsers(){
-        return this.userRepository.findAll();
+    public List<UserRequestDTO> getAllUsers(){
+        List<User> users = this.userRepository.findAll();
+        List<UserRequestDTO> userDTOs = users.stream().map(user -> {
+            UserRequestDTO userDTO = new UserRequestDTO();
+            userDTO.setId(user.getId());
+            userDTO.setEmailAddress(user.getEmailAddress());
+            return userDTO;
+        }).toList();
+        return userDTOs;
     }
 
-    public User getUserById(Integer id){
-       return this.userRepository.findById(id).orElseThrow();
+    public UserRequestDTO getUserById(Integer id){
+        User user = this.userRepository.findById(id).orElseThrow();
+        return new UserRequestDTO(
+                user.getId(),
+                user.getEmailAddress()
+        ) ;
     }
-
 }

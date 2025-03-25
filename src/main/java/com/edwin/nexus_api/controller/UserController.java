@@ -1,5 +1,6 @@
 package com.edwin.nexus_api.controller;
 
+import com.edwin.nexus_api.DTO.UserCreationDTO;
 import com.edwin.nexus_api.DTO.UserRequestDTO;
 import com.edwin.nexus_api.model.User;
 import com.edwin.nexus_api.service.UserService;
@@ -17,22 +18,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public ResponseEntity<User> createUser(@RequestBody UserRequestDTO userRequest){
-        User user = this.userService.createUser(userRequest);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserRequestDTO> createUser(@RequestBody UserCreationDTO userRequest){
+        UserRequestDTO user = this.userService.createUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = this.userService.getAllUsers();
+    public ResponseEntity<List<UserRequestDTO>> getAllUsers(){
+        List<UserRequestDTO> users = this.userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id){
-        User user = this.userService.getUserById(id);
+    public ResponseEntity<UserRequestDTO> getUserById(@PathVariable Integer id){
+        UserRequestDTO user = this.userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 }
