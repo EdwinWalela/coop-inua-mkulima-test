@@ -1,8 +1,20 @@
 package com.edwin.nexus_api.DTO;
 
+import java.util.Date;
+
 public class UserRequestDTO {
     private int id;
     private String emailAddress;
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private Date createdAt;
 
     public UserRequestDTO() {
     }

@@ -37,6 +37,7 @@ public class UserService {
             UserRequestDTO userDTO = new UserRequestDTO();
             userDTO.setId(user.getId());
             userDTO.setEmailAddress(user.getEmailAddress());
+            userDTO.setCreatedAt(user.getCreatedAt());
             return userDTO;
         }).toList();
         return userDTOs;
